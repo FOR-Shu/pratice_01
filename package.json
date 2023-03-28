@@ -1,0 +1,23 @@
+{
+  "name": "shu_tool",
+  "version": "1.0.0",
+  "description": "Webpack + Typescript + Sass + Handlebars",
+  "main": "index.js",
+  "repository": "https://github.com/FOR-Shu/shu_tool.git",
+  "author": "shuyuan chuang",
+  "license": "MIT",
+  "scripts": {
+    "serve": "webpack serve --open",
+    "build": "webpack"
+  },
+  "dependencies": {
+    "handlebars": "^4.7.7",
+    "handlebars-loader": "^1.7.3",
+    "html-webpack-plugin": "^5.5.0",
+    "ts-loader": "^9.4.2",
+    "typescript": "^5.0.2",
+    "webpack": "^5.76.3",
+    "webpack-cli": "^5.0.1",
+    "webpack-dev-server": "^4.13.1"
+  }
+}
