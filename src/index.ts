@@ -1,3 +1,6 @@
-console.log("hello TS!")
+import './style.scss'
+import Person from "./person"
 
-console.log("hello world")
+const shuyuan = new Person("Shuyuan", 21)
+
+console.log("user is => ", shuyuan)

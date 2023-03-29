@@ -1,10 +1,11 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 const path = require('path');
 const { optimize } = require('webpack');
 
 module.exports = {
-    entry: './src/index.ts', // change
+    entry: './src/index.ts',
     module: {
         rules: [
             {
@@ -14,7 +15,17 @@ module.exports = {
             },
             {
                 test: /\.hbs$/, loader: "handlebars-loader"
-            }
+            },
+            {
+                test: /\.s[ac]ss$/i,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    // Translates CSS into CommonJS
+                    "css-loader",
+                    // Compiles Sass to CSS
+                    "sass-loader",
+                ],
+            },
         ],
     },
     resolve: {
@@ -26,11 +37,18 @@ module.exports = {
         clean: true
     },
 
-    plugins: [new HtmlWebpackPlugin({
-        title: 'main page',
-        filename: 'index.html',
-        template: 'view/index.hbs',
-    })],
+    plugins: [
+        new MiniCssExtractPlugin(),
+    ].concat(
+        ["index", "about", "contactUs"].map(page => {
+            return new HtmlWebpackPlugin({
+                inject: 'body',
+                title: `${page} page`,
+                filename: `${page}.html`,
+                template: `view/${page}.hbs`,
+            })
+        })
+    ),
 
     devtool: "inline-source-map",
     devServer: {
